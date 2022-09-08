@@ -1,0 +1,22 @@
+version: '3'
+services:
+    rundeck:
+        image: rundeck/rundeck:4.6.0
+        environment:
+            RUNDECK_GRAILS_URL: http://localhost:4440
+            RUNDECK_DATABASE_DRIVER: com.microsoft.sqlserver.jdbc.SQLServerDriver
+            RUNDECK_DATABASE_USERNAME: sa
+            RUNDECK_DATABASE_PASSWORD: ASDasd11--
+            RUNDECK_DATABASE_URL: jdbc:sqlserver://mssql:1433;DatabaseName=tempdb
+        tty: true
+        ports:
+          - 4440:4440
+    mssql:
+        image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+        expose:
+          - 1434
+        environment:
+          - ACCEPT_EULA=Y
+          - SA_PASSWORD=ASDasd11--
+          - MSSQL_PID=Express
+          - MYSQL_PASSWORD=rundeck
